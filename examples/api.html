@@ -1,3 +1,5 @@
+<!-- See, I told you -->
+
 <!DOCTYPE html>
 <html>
     <head>		
@@ -14,30 +16,29 @@
             }
         </style>
         <script id="sample">
-    // The Ace embed API is documented at https://github.com/ajaxorg/ace/wiki/Embedding---API
+    // Here is the actual JavaScript used to render this page. Go ahead, view-source if you don't believe me.
         
     // YUI isn't required, I'm just using it for convinience
     YUI().use("event", function(Y){
         
         var $ = Y.one, // Bling it up
-            editor = {}; // This will be your Ace API object once the onReady fires
-            
-        // Set the onReady() callback that the iframe will fire when it is ready
-        Embeditor.onReady = function(){
-            //editor = Embeditor.getInstance();
-            //editor.setValue($("#sample").getContent());
-        };
+            editor = new Embeditor("embeditor");
+        
+        // Set the onReady() function that the iframe will fire when it is ready
+        editor.onReady(function(){
+            editor.setValue($("#sample").getContent());
+        });
         
         // Get the content of the editor and log it to the console
         $("#btnGetValue").on("click", function(){
-            Embeditor.getValue("embeditor", function(value){
+            editor.getValue(function(value){
                Y.log("----> " + value);
             });
         });
         
         // Set the content of the editor
         $("#btnSetValue").on("click", function(){
-            Embeditor.setValue("embeditor", "Embeditor is awesome!");
+            editor.setValue("Embeditor is awesome!");
         });
         
     });
@@ -45,7 +46,7 @@
     </head>
     
     <body>
-        <iframe id="embeditor" name="embeditor" src="http://embeditor.org"></iframe>
+        <iframe id="embeditor" name="embeditor" src="http://embeditor.org/?mode=javascript"></iframe>
         
         <br ><br >
         
