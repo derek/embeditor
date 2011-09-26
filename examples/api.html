@@ -24,7 +24,7 @@
         var $ = Y.one, // Bling it up
             editor = new Embeditor("embeditor");
         
-        // Set the onReady() function that the iframe will fire when it is ready
+        // Set the onReady() callback that will be fired when the editor is ready
         editor.onReady(function(){
             editor.setValue($("#sample").getContent());
         });
