@@ -20,22 +20,24 @@
     YUI().use("event", function(Y){
         
         var $ = Y.one, // Bling it up
-            editor; // This will be your Ace API object once the onReady fires
+            editor = {}; // This will be your Ace API object once the onReady fires
             
         // Set the onReady() callback that the iframe will fire when it is ready
         Embeditor.onReady = function(){
-            editor = Embeditor.getInstance();
-            editor.setValue($("#sample").getContent());
+            //editor = Embeditor.getInstance();
+            //editor.setValue($("#sample").getContent());
         };
         
         // Get the content of the editor and log it to the console
         $("#btnGetValue").on("click", function(){
-            Y.log(editor.getValue());
+            Embeditor.getValue("embeditor", function(value){
+               Y.log("----> " + value);
+            });
         });
         
         // Set the content of the editor
         $("#btnSetValue").on("click", function(){
-            editor.setValue("Embeditor is awesome!");
+            Embeditor.setValue("embeditor", "Embeditor is awesome!");
         });
         
     });
