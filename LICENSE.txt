@@ -1,7 +1,4 @@
-In the original BSD license, both occurrences of the phrase "COPYRIGHT HOLDERS AND CONTRIBUTORS" in the disclaimer read "REGENTS AND CONTRIBUTORS".
-
-Here is the license template:
-
+BSD LICENSE
 Copyright (c) 2011, Derek Gathright
 All rights reserved.
 
