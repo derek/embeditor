@@ -30,26 +30,14 @@
                 }
             }
             
-            switch(options.mode) {
-                case "javascript":
-                    loadScript("js/mode-javascript.js", function(){
-                        var Mode = require("ace/mode/javascript").Mode;
-                        editor.getSession().setMode(new Mode());
-                    })    
-                    break;
-                case "html":
-                    loadScript("js/mode-html.js", function(){
-                        var Mode = require("ace/mode/html").Mode;
-                        editor.getSession().setMode(new Mode());
-                    })    
-                    break;
-                case "css":
-                    loadScript("js/mode-css.js", function(){
-                        var Mode = require("ace/mode/css").Mode;
-                        editor.getSession().setMode(new Mode());
-                    })    
-                    break;
+            
+            if (['javascript', 'html', 'css'].indexOf(options.mode) >= 0) {
+                loadScript("js/mode-" + options.mode + ".js", function(){
+                    var Mode = require("ace/mode/" + options.mode).Mode;
+                    editor.getSession().setMode(new Mode());
+                })
             }
+
             
             function loadScript(sScriptSrc, oCallback) {
                 var oHead = document.getElementsByTagName('head')[0];
