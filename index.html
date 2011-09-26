@@ -56,7 +56,8 @@
             }
             
             parent.postMessage({
-                message: "embeditor:ready"
+                message    : "embeditor:ready",
+                windowName : window.name
             }, "*");
             
             window.addEventListener("message", function(e){

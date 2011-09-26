@@ -1,22 +1,37 @@
 (function(exports){
     
-    var callbacks = {};
+    var callbacks  = {};
+    var isReady    = false;
     
     var Embeditor = function(id){
         return {
             getValue: function(fn){
-                var callback_id = Math.random();
-                callbacks[callback_id] = fn;
-                document.getElementById(id).contentWindow.postMessage({
-                    message : "embeditor:getValue",
-                    cbid    : callback_id
-                }, "*");
+                if (isReady){
+                    var callback_id = Math.random();
+                    callbacks[callback_id] = fn;
+                    document.getElementById(id).contentWindow.postMessage({
+                        "message"    : "embeditor:getValue",
+                        "cbid"       : callback_id,
+                        "instanceId" : id
+                    }, "*");
+                }
+                else{
+                    //console.log("Not ready");
+                }
             },
             setValue: function(val){
-                document.getElementById(id).contentWindow.postMessage({
-                    message : "embeditor:setValue",
-                    value   : val
-                }, "*")
+                if (isReady){
+                    document.getElementById(id).contentWindow.postMessage({
+                        message : "embeditor:setValue",
+                        value   : val
+                    }, "*")
+                }
+                else{
+                    //console.log("Not ready");
+                }
+            },
+            onReady: function(fn){
+                callbacks["onReady" + id] = fn;
             }
         }
     }
@@ -24,7 +39,10 @@
     window.addEventListener("message", function(e){
         switch(e.data.message) {
             case "embeditor:ready":
-                // TODO
+                isReady = true;
+                if (callbacks["onReady" + e.data.windowName]) {
+                    callbacks["onReady" + e.data.windowName]();
+                }
                 break;
                 
             case "embeditor:sendValue":
