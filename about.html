@@ -19,15 +19,44 @@
     <body>
         <h1>Embeditor</h1>
         
-        <p>A super easy way to embed a text editor onto any webpage!</p>
+        <p>A super easy way to embed a text editor onto any webpage.</p>
         
         <h3>Ok. How?</h3>
+        <p>Simple.</p>
         <pre class="prettyprint" id="html">
             
     &lt;iframe src="http://embeditor.org/"&gt;&lt;/iframe&gt;
         </pre>
+        
+        <p>That's it!  To make it bigger/smaller, use CSS to resize.  The editor will take up 100% height/width of the iframe.</p>
+        <p>For example</p>
+        <pre class="prettyprint" id="html">
 
-        <p>That's it!  Well, almost.  There's even a simple <a href="api.js">Embeditor JavaScript API</a> that you can include into your page as well to give you access to the underlying editor.</p>
+    &lt;iframe id="embeditor" src="http://embeditor.org/"&gt;&lt;/iframe&gt;
+    &lt;style&gt;
+        #embeditor{
+            height:500px;
+            width:300px;
+            overflow: hidden;
+            border:none;
+        }
+    &lt;/style&gt;
+        </pre>
+
+        
+        <h3>API</h3>
+        <div>
+            <ul>
+                <li>
+                    <p>Custom modes - Embeditor currently support HTML, CSS, and JS.  More on the way.  To activate, simply append ?mode=javascript, ?mode=html, or ?mode=css to the URL.</p>
+                    
+                    <pre class="prettyprint" id="html">
+
+    &lt;iframe src="http://embeditor.org/?mode=javascript"&gt;&lt;/iframe&gt;
+                    </pre>
+                    </li>
+            </ul>
+        </div>
         
         <div>
             <h3>"Gimme demos!" Ok, fine!</h3>
