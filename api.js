@@ -5,16 +5,17 @@
     var Embeditor = function(id){
         return {
             getValue: function(fn){
-                callbacks['asd'] = fn;
+                var callback_id = Math.random();
+                callbacks[callback_id] = fn;
                 document.getElementById(id).contentWindow.postMessage({
-                    message: "embeditor:getValue"
-                    cbid   : "asd",
+                    message : "embeditor:getValue",
+                    cbid    : callback_id
                 }, "*");
             },
             setValue: function(val){
                 document.getElementById(id).contentWindow.postMessage({
-                    message: "embeditor:setValue",
-                    value  : val
+                    message : "embeditor:setValue",
+                    value   : val
                 }, "*")
             }
         }
