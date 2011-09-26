@@ -55,10 +55,22 @@
                 oHead.appendChild(oScript);
             }
             
-            /*parent.postMessage({
-                message: "embeditorReady",
+            parent.postMessage({
+                message: "embeditor:ready",
                 windowName: window.name
-            }, "*");*/
+            }, "*");
+            
+            window.addEventListener("message", function(e){
+                if (e.data.message === "embeditor:getValue") {
+                    parent.postMessage({
+                        message: "embeditor:sendValue",
+                        value: editor.getSession().getValue()
+                    }, "*");
+                }
+                else if (e.data.message === "embeditor:setValue") {
+                    editor.getSession().setValue(e.data.value)
+                }
+            }, false);
         </script>
     </body>
 
