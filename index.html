@@ -56,15 +56,15 @@
             }
             
             parent.postMessage({
-                message: "embeditor:ready",
-                windowName: window.name
+                message: "embeditor:ready"
             }, "*");
             
             window.addEventListener("message", function(e){
                 if (e.data.message === "embeditor:getValue") {
                     parent.postMessage({
                         message: "embeditor:sendValue",
-                        value: editor.getSession().getValue()
+                        value: editor.getSession().getValue(),
+                        cbid: e.data.cbid
                     }, "*");
                 }
                 else if (e.data.message === "embeditor:setValue") {
