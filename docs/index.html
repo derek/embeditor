@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-    <meta charset='utf-8'>
     <head>
         <script type="text/javascript" src="http://yui.yahooapis.com/3.4.0/build/yui/yui.js"></script>
         <script type="text/javascript">
@@ -11,7 +10,7 @@
                     }
                 }
             }).use('gallery-prettify', function(Y) {
-              Y.prettyPrint();
+                Y.prettyPrint();
             });
         </script>
         <link type="text/css" rel="stylesheet" href="http://derek.github.com/sandbox/yui/gallery-prettify/gallery-prettify.css">
@@ -49,7 +48,9 @@
         <ul>
             <li><a href="examples/simple.html">Simple</a></li>
             <li><a href="examples/api.html">API</a></li>
-            <li><a href="examples/multiple.html">Multiple editors w/ API</a></li>
+            <li><a href="examples/multiple.html">API - Communicating between multiple editors</a></li>
+            <li><a href="examples/eval.html">API - Evaluating Javascript</a></li>
+            <li><a href="examples/api.html">API - Render</a></li>
         </ul>
             
         <h3>API</h3>
@@ -70,19 +71,19 @@
     &lt;iframe src="http://embeditor.org/"&gt;&lt;/iframe&gt;
     &lt;script src="http://embeditor.org/api.js"&gt;&lt;/script&gt;
     &lt;script&gt;
-        var editor = new Embeditor('embeditor'); // Arg is the 'id' of the Emebditor element 
+        var editor = new Embeditor("embeditor");
 
         // Set the onReady() callback that will be fired when the editor is ready
         editor.onReady(function(){
-            editor.setValue('Editor is ready');
+            editor.setValue("Editor is ready");
         });
 
         // Get the content of the editor and log it to the console
-        document.getElementById('btnGetValue').onclick = function(){
+        $("#btnGetValue").on("click", function(){
             editor.getValue(function(value){
-               console.log('Editor says ----> ' + value);
+               console.log("Editor says ----> " + value);
             });
-        };
+        });
     &lt;/script&gt;
                     </pre>
                 </li>

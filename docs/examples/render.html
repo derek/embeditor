@@ -18,7 +18,7 @@
         </style>
         <script id="sample">
     // YUI isn't required, I'm just using it for convinience
-    YUI().use("event", "node-event-simulate", function(Y){
+    YUI().use("event", function(Y){
         
         var $ = Y.one, // Bling it up
             editor = new Embeditor("embeditor");
@@ -26,15 +26,16 @@
         // Set the onReady() callback that will be fired when the editor is ready
         editor.onReady(function(){
             editor.setValue("<p>Type anything into here and then click render to see the output below</p>\n\n<p>zomg, another Embeditor!</p>\n<iframe src='http://embeditor.org/'></iframe>");
-            $("#btnRender").simulate("click");
+            render();
         });
         
-        // Get the content of the editor and log it to the console
-        $("#btnRender").on("click", function(){
+        function render () {
             editor.getValue(function(value){
                $("#output").setContent(value);
             });
-        });
+        }
+        // Get the content of the editor and log it to the console
+        $("#btnRender").on("click", render);
         
     });
         </script>

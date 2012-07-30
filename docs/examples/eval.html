@@ -18,14 +18,14 @@
         </style>
         <script id="sample">
     // YUI isn't required, I'm just using it for convinience
-    YUI().use("event", "node-event-simulate", function(Y){
+    YUI().use("event", function(Y){
         
         var $ = Y.one, // Bling it up
             editor = new Embeditor("embeditor");
         
         // Set the onReady() callback that will be fired when the editor is ready
         editor.onReady(function(){
-            editor.setValue("\n\talert('YUI rocks!');\n");x
+            editor.setValue("\n\talert('YUI rocks!');\n");
         });
         
         // Get the content of the editor and log it to the console
