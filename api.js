@@ -50,7 +50,6 @@
                 delete callbacks[e.data.cbid];
                 break;
         }
-        
     }, false);
     
     exports.Embeditor = Embeditor;

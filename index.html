@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
+    <meta charset='utf-8'>
     <head>
         <script src="js/ace.js" type="text/javascript" charset="utf-8"></script>
-        
         <style>
             html, body{
                 padding:0;
@@ -16,38 +16,50 @@
     </head>
     
     <body>
-        <div id="editor"></div>
-        <script>
-            var editor = ace.edit("editor");
+        <div id="editor">
+    Embeditor is a super easy way to embed a fancy text/code editor onto any webpage.
+
+    How do I use it?  Just add this to your HTML page:
             
-            var options = {};
-            var querystring = window.location.href.split("?");
+        &lt;iframe src="http://embeditor.org/"&gt;&lt;/iframe&gt;
+    
+    That's it! To make it bigger/smaller, use CSS to resize. The editor will take up 100% height/width of the iframe.
+
+    This intro message will appear unless a 'mode' is specified in the iframe src's querystring (i.e. ?mode=text).  Valid modes are 'text', 'html', 'css', and 'javascript'.
+
+    More details, API info, and examples can be found @ http://derek.github.com/embeditor/</div>
+        <script>
+            var editor = ace.edit("editor"),
+                options = {},
+                querystring = window.location.href.split("?"),
+                optionsArr, i, o;
+
             if (querystring[1]) {
-                var optionsArr = querystring[1].split("&");
-                for(var i in optionsArr) {
-                    var o = optionsArr[i].split("=");
+                optionsArr = querystring[1].split("&");
+                for(i in optionsArr) {
+                    o = optionsArr[i].split("=");
                     options[o[0]] = o[1];
                 }
             }
             
-            
-            if (['javascript', 'html', 'css'].indexOf(options.mode) >= 0) {
-                loadScript("js/mode-" + options.mode + ".js", function(){
-                    var Mode = require("ace/mode/" + options.mode).Mode;
-                    editor.getSession().setMode(new Mode());
-                })
+            if (options.mode) {
+                editor.getSession().setValue('');
+                if (['javascript', 'html', 'css'].indexOf(options.mode) >= 0) {
+                    loadScript("js/mode-" + options.mode + ".js", function(){
+                        var Mode = require("ace/mode/" + options.mode).Mode;
+                        editor.getSession().setMode(new Mode());
+                    })
+                }
             }
 
-            
             function loadScript(sScriptSrc, oCallback) {
-                var oHead = document.getElementsByTagName('head')[0];
-                var oScript = document.createElement('script');
+                var oHead = document.getElementsByTagName('head')[0],
+                    oScript = document.createElement('script');
+
                 oScript.type = 'text/javascript';
                 oScript.src = sScriptSrc;
-                // most browsers
-                oScript.onload = oCallback;
-                // IE 6 & 7
-                oScript.onreadystatechange = function() {
+                oScript.onload = oCallback; // most browsers
+                oScript.onreadystatechange = function() { // IE 6 & 7
                     if (this.readyState == 'complete') {
                         oCallback();
                     }
