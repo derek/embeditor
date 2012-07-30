@@ -36,7 +36,8 @@ Demos
 * [API](examples/api.html)
 * [API - Communicating between multiple editors](examples/multiple.html)
 * [API - Evaluating Javascript](examples/eval.html)
-* [API - Render](examples/render.html)
+* [API - Using as an HTML editor](examples/render.html)
+* [API - Using as a Markdown editor](examples/markdown.html)
 
 API
 ---
