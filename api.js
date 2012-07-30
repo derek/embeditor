@@ -1,9 +1,10 @@
 (function(exports){
     
-    var callbacks  = {};
-    var isReady    = false;
+    var callbacks  = {},
+        isReady    = false,
+        Embeditor;
     
-    var Embeditor = function(id){
+    Embeditor = function(id){
         return {
             getValue: function(fn){
                 if (isReady){
@@ -34,7 +35,7 @@
                 callbacks["onReady" + id] = fn;
             }
         }
-    }
+    };
     
     window.addEventListener("message", function(e){
         switch(e.data.message) {

@@ -78,11 +78,11 @@
         });
 
         // Get the content of the editor and log it to the console
-        $('#btnGetValue').on('click', function(){
+        document.getElementById('btnGetValue').onclick = function(){
             editor.getValue(function(value){
                console.log('Editor says ----> ' + value);
             });
-        });
+        };
     &lt;/script&gt;
                     </pre>
                 </li>
